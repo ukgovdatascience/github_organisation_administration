@@ -28,10 +28,10 @@ To run this project, you need a `.secrets` file with secrets/credentials as envi
 [documentation][docs-loading-environment-variables-secrets] for further guidance. The secrets/credentials should have
 the following environment variable name(s):
 
-| Secret/credential | Environment variable name | Description                                |
-|-------------------|---------------------------|--------------------------------------------|
-| Secret 1          | `SECRET_VARIABLE_1`       | Plain English description of Secret 1.     |
-| Credential 1      | `CREDENTIAL_VARIABLE_1`   | Plain English description of Credential 1. |
+| Secret/credential            | Environment variable name | Description                                                      |
+|------------------------------|---------------------------|------------------------------------------------------------------|
+| GitHub personal access token | `GITHUB_API_TOKEN`        | See [here][github-personal-access-token] for further information |
+| GitHub organisation name     | `GITHUB_ORGANISATION`     | The GitHub organisation name, e.g. `ukgovdatascience`            |
 
 Once you've added these environment variables to `.secrets` you will need to
 [load them via `.envrc`][docs-loading-environment-variables].
@@ -52,6 +52,7 @@ If you want to help us build, and improve `GitHub Repository Contributor Search`
 This project structure is based on the `govcookiecutter` template project.
 
 [contributing]: ./CONTRIBUTING.md
+[github-personal-access-token]: https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token
 [govcookiecutter]: https://github.com/ukgovdatascience/govcookiecutter
 [docs-loading-environment-variables]: ./docs/user_guide/loading_environment_variables.md
 [docs-loading-environment-variables-secrets]: ./docs/user_guide/loading_environment_variables.md#storing-secrets-and-credentials
