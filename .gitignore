@@ -855,10 +855,12 @@ data/*
 data/external/*
 data/raw/*
 data/interim/*
+data/logs/*
 data/processed/*
 !data/external/.gitkeep
 !data/raw/.gitkeep
 !data/interim/.gitkeep
+!data/logs/.gitkeep
 !data/processed/.gitkeep
 
 # Ignore the `docs/reference/api` folder
