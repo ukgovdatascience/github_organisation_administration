@@ -88,3 +88,9 @@ def example_json_file(temporary_json_directory, test_input_username: str, test_i
 
     # Return a dictionary containing the JSON, and its filepath
     return {"json": temporary_json, "path": temporary_json_filepath}
+
+
+@pytest.fixture
+def patch_find_organisation_repos_github(mocker) -> MagicMock:
+    """Patch the github.Github class imported into find_organisation_repos.py."""
+    return mocker.patch("src.make_data.find_organisation_repos.Github")

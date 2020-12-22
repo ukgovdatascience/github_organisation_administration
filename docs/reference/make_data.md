@@ -7,10 +7,12 @@ These `src` package functions generate data.
 .. currentmodule:: src
 ```
 
-## Function heading
+## GitHub repositories
 
 ```{eval-rst}
 .. autosummary::
     :toctree: api/
+
+    find_organisation_repos
 
 ```
