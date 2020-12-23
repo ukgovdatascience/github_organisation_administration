@@ -94,3 +94,33 @@ def example_json_file(temporary_json_directory, test_input_username: str, test_i
 def patch_find_organisation_repos_github(mocker) -> MagicMock:
     """Patch the github.Github class imported into find_organisation_repos.py."""
     return mocker.patch("src.make_data.find_organisation_repos.Github")
+
+
+@pytest.fixture
+def patch_get_contributors_for_all_repos_github(mocker) -> MagicMock:
+    """Patch the github.Github class imported into get_contributors_for_all_repos.py."""
+    return mocker.patch("src.make_data.get_contributors_for_all_repos.Github")
+
+
+@pytest.fixture
+def patch_get_contributors_for_repo(mocker) -> MagicMock:
+    """Patch the get_contributors_for_repo function."""
+    return mocker.patch("src.make_data.get_contributors_for_all_repos.get_contributors_for_repo")
+
+
+@pytest.fixture
+def patch_get_contributors_for_all_repos_partial(mocker) -> MagicMock:
+    """Patch the functools.partial function imported into get_contributors_for_all_repos.py"""
+    return mocker.patch("src.make_data.get_contributors_for_all_repos.partial")
+
+
+@pytest.fixture
+def patch_multiprocessing_pool(mocker) -> MagicMock:
+    """Patch the multiprocessing.Pool function."""
+    return mocker.patch("multiprocessing.Pool")
+
+
+@pytest.fixture
+def patch_multiprocessing_pool_enter_imap_unordered(patch_multiprocessing_pool: MagicMock) -> MagicMock:
+    """Patch the imap_unordered function within an open multiprocessing.Pool context manager."""
+    return patch_multiprocessing_pool.return_value.__enter__.return_value.imap_unordered

@@ -16,3 +16,14 @@ These `src` package functions generate data.
     find_organisation_repos
 
 ```
+
+## GitHub contributors
+
+```{eval-rst}
+.. autosummary::
+    :toctree: api/
+
+    get_contributors_for_all_repos
+    get_contributors_for_repo
+
+```
