@@ -1,31 +1,9 @@
 from functools import partial
-from github import Github, NamedUser, PaginatedList
+from github import Github, PaginatedList
+from src.make_data.get_contributors_for_repo import get_contributors_for_repo
 from src.utils.logger import Log, logger
-from typing import Dict, List, Union
+from typing import Dict, List
 import multiprocessing as mp
-
-
-@Log(logger, level="debug")
-def get_contributors_for_repo(g: Github, repository_name: str) -> Dict[str, Union[PaginatedList.PaginatedList,
-                                                                                  NamedUser.NamedUser]]:
-    """Get all contributors for a GitHub repository.
-
-    Args:
-        g: A `github.Github` class object initialised with a GitHub username and personal access token with the
-            necessary permissions.
-        repository_name: A Github repository name.
-
-    Returns:
-        A `github.PaginatedList.PaginatedList` or `NamedUser.NamedUser` object containing the contributors in a GitHub
-        repository.
-
-    """
-
-    # Get the repository
-    g_repository = g.get_repo(repository_name)
-
-    # Return a dictionary of the repository name as a key with the contributors as the values
-    return {repository_name: g_repository.get_contributors()}
 
 
 @Log(logger)

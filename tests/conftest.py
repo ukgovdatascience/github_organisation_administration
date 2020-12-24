@@ -97,8 +97,14 @@ def patch_find_organisation_repos_github(mocker) -> MagicMock:
 
 
 @pytest.fixture
+def patch_get_contributors_for_repo_github(mocker) -> MagicMock:
+    """Patch the github.Github class imported into get_contributors_for_repo.py."""
+    return mocker.patch("src.make_data.get_contributors_for_repo.Github")
+
+
+@pytest.fixture
 def patch_get_contributors_for_all_repos_github(mocker) -> MagicMock:
-    """Patch the github.Github class imported into get_contributors_for_all_repos.py."""
+    """Patch the github.Github class imported into get_contributors_for_all_repo.py."""
     return mocker.patch("src.make_data.get_contributors_for_all_repos.Github")
 
 
