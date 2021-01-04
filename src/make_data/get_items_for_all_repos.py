@@ -8,7 +8,7 @@ import multiprocessing as mp
 
 @Log(logger)
 def get_items_for_all_repos(g: Github, method_name: str, repositories: PaginatedList.PaginatedList,
-                            cpu_count: int = mp.cpu_count()) -> Dict[str, List[Any]]:
+                            cpu_count: int = mp.cpu_count(), max_chunksize: int = 1000) -> Dict[str, List[Any]]:
     """Get all the items for a list of GitHub repositories, where items is the output from `method_name`.
 
     Args:
@@ -17,6 +17,7 @@ def get_items_for_all_repos(g: Github, method_name: str, repositories: Paginated
         method_name: A method of the github.Repository.Repository class.
         repositories: A list of GitHub repositories as a `github.PaginatedList.PaginatedList` object.
         cpu_count: Default: maximum number of CPUs. The number of CPUs to parallelise the API requests.
+        max_chunksize: Default: 1000. The maximum number of repositories per CPU to call.
 
     Returns:
         A dictionary where the GitHub repositories' full names are keys, and their items are values.
@@ -29,9 +30,13 @@ def get_items_for_all_repos(g: Github, method_name: str, repositories: Paginated
     # Partially complete the get_items_for_repo function with g, and method_name
     partial_get_items_for_repo = partial(get_items_for_repo, g, method_name)
 
+    # Calculate the number of chunks to be sent to each process; if this exceeds max_chunksize, set to max_chunksize
+    chunk_size = len(repositories_full_names) / cpu_count
+    chunk_size = min(int(chunk_size) + bool(chunk_size), max_chunksize)
+
     # Set up a multiprocessing.Pool object, and use it to get items for each repository in parallel
     with mp.Pool(cpu_count) as pool:
-        mp_items = list(pool.imap_unordered(partial_get_items_for_repo, repositories_full_names))
+        mp_items = list(pool.imap_unordered(partial_get_items_for_repo, repositories_full_names, chunksize=chunk_size))
 
     # Collapse the list of dictionaries in mp_items into a single dictionary - assumes there are no duplicate keys
     repositories_items = {k: v for d in mp_items for k, v in d.items()}

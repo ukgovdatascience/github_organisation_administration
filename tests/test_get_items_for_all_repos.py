@@ -13,12 +13,14 @@ args_test_get_items_for_all_repos_repositories = [
 ]
 args_test_get_items_for_all_repos_method_name = ["hello", "world"]
 args_test_get_items_for_all_repos_cpu_count = [*range(1, 8, 2)]
+args_test_get_items_for_all_repos_test_input_max_chunksize = [1, 4, 8]
 args_test_get_items_for_all_repos_duplicates = [*range(1, 4)]
 
 
 @pytest.mark.parametrize("test_input_repositories", args_test_get_items_for_all_repos_repositories)
 @pytest.mark.parametrize("test_input_method_name", args_test_get_items_for_all_repos_method_name)
 @pytest.mark.parametrize("test_input_cpu_count", args_test_get_items_for_all_repos_cpu_count)
+@pytest.mark.parametrize("test_input_max_chunksize", args_test_get_items_for_all_repos_test_input_max_chunksize)
 class TestGetItemsForAllRepos:
 
     @staticmethod
@@ -43,14 +45,16 @@ class TestGetItemsForAllRepos:
                                       patch_get_items_for_repo: MagicMock,
                                       patch_get_items_for_all_repos_partial: MagicMock,
                                       patch_multiprocessing_pool: MagicMock, test_input_method_name: str,
-                                      test_input_repositories: List[str], test_input_cpu_count: int) -> None:
+                                      test_input_repositories: List[str], test_input_cpu_count: int,
+                                      test_input_max_chunksize: int) -> None:
         """Test that functools.partial function is called once correctly."""
 
         # Execute the get_items_for_all_repos function
         _ = get_items_for_all_repos(patch_get_items_for_all_repos_github,
                                     test_input_method_name,
                                     self.create_list_of_classes_with_full_name(test_input_repositories),
-                                    test_input_cpu_count)
+                                    test_input_cpu_count,
+                                    test_input_max_chunksize)
 
         # Assert that functools.partial is called once with the correct arguments
         patch_get_items_for_all_repos_partial.assert_called_once_with(patch_get_items_for_repo,
@@ -61,14 +65,16 @@ class TestGetItemsForAllRepos:
                                         patch_get_items_for_repo: MagicMock,
                                         patch_get_items_for_all_repos_partial: MagicMock,
                                         patch_multiprocessing_pool: MagicMock, test_input_method_name: str,
-                                        test_input_repositories: List[str], test_input_cpu_count: int) -> None:
+                                        test_input_repositories: List[str], test_input_cpu_count: int,
+                                        test_input_max_chunksize: int) -> None:
         """Test multiprocessing.Pool is called once correctly."""
 
         # Execute the get_items_for_all_repos function
         _ = get_items_for_all_repos(patch_get_items_for_all_repos_github,
                                     test_input_method_name,
                                     self.create_list_of_classes_with_full_name(test_input_repositories),
-                                    test_input_cpu_count)
+                                    test_input_cpu_count,
+                                    test_input_max_chunksize)
 
         # Assert multiprocessing.Pool is called once with the correct arguments
         patch_multiprocessing_pool.assert_called_once_with(test_input_cpu_count)
@@ -78,18 +84,25 @@ class TestGetItemsForAllRepos:
                                              patch_get_items_for_all_repos_partial: MagicMock,
                                              patch_multiprocessing_pool_enter_imap_unordered: MagicMock,
                                              test_input_method_name: str, test_input_repositories: List[str],
-                                             test_input_cpu_count: int) -> None:
+                                             test_input_cpu_count: int, test_input_max_chunksize: int) -> None:
         """Test multiprocessing.Pool.imap_unordered is called correctly."""
+
+        # Calculate the expected chunk size for each process
+        test_expected_chunksize = len(test_input_repositories) / test_input_cpu_count
+        test_expected_chunksize = min(int(test_expected_chunksize) + bool(test_expected_chunksize),
+                                      test_input_max_chunksize)
 
         # Execute the get_items_for_all_repos function
         _ = get_items_for_all_repos(patch_get_items_for_all_repos_github,
                                     test_input_method_name,
                                     self.create_list_of_classes_with_full_name(test_input_repositories),
-                                    test_input_cpu_count)
+                                    test_input_cpu_count,
+                                    test_input_max_chunksize)
 
         # Assert multiprocessing.Pool.imap_unordered is called with the correct arguments
         patch_multiprocessing_pool_enter_imap_unordered.assert_called_once_with(
-            patch_get_items_for_all_repos_partial.return_value, test_input_repositories
+            patch_get_items_for_all_repos_partial.return_value, test_input_repositories,
+            chunksize=test_expected_chunksize
         )
 
     @pytest.mark.parametrize("test_input_duplicates", args_test_get_items_for_all_repos_duplicates)
@@ -98,7 +111,8 @@ class TestGetItemsForAllRepos:
                                                        patch_get_items_for_all_repos_partial: MagicMock,
                                                        patch_multiprocessing_pool_enter_imap_unordered: MagicMock,
                                                        test_input_method_name: str, test_input_repositories: List[str],
-                                                       test_input_cpu_count: int, test_input_duplicates: int) -> None:
+                                                       test_input_cpu_count: int, test_input_max_chunksize: int,
+                                                       test_input_duplicates: int) -> None:
         """Test an AssertionError is raised if duplicate keys (repository names) are returned."""
 
         # Generate duplicate repositories
@@ -115,13 +129,15 @@ class TestGetItemsForAllRepos:
             _ = get_items_for_all_repos(patch_get_items_for_all_repos_github,
                                         test_input_method_name,
                                         self.create_list_of_classes_with_full_name(test_input_repositories),
-                                        test_input_cpu_count)
+                                        test_input_cpu_count,
+                                        test_input_max_chunksize)
 
     def test_returns_correctly(self, patch_get_items_for_all_repos_github: MagicMock,
                                patch_get_items_for_repo: MagicMock,
                                patch_get_items_for_all_repos_partial: MagicMock,
                                patch_multiprocessing_pool_enter_imap_unordered: MagicMock, test_input_method_name: str,
-                               test_input_repositories: List[str], test_input_cpu_count: int) -> None:
+                               test_input_repositories: List[str], test_input_cpu_count: int,
+                               test_input_max_chunksize: int) -> None:
         """Test the output of the function is as expected."""
 
         # Set the return value of patch_multiprocessing_pool_enter_imap_unordered
@@ -133,7 +149,8 @@ class TestGetItemsForAllRepos:
         test_output = get_items_for_all_repos(patch_get_items_for_all_repos_github,
                                               test_input_method_name,
                                               self.create_list_of_classes_with_full_name(test_input_repositories),
-                                              test_input_cpu_count)
+                                              test_input_cpu_count,
+                                              test_input_max_chunksize)
 
         # Assert the output is as expected
         assert test_output == {r: ["octocat"] for r in test_input_repositories}
