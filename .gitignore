@@ -843,7 +843,7 @@ MigrationBackup/
 
 # End of https://www.toptal.com/developers/gitignore/api/vim,venv,pydev,flask,dotenv,django,direnv,python,virtualenv,pycharm+all,visualstudio,jupyternotebooks,macos,linux,windows
 
-### GitHub Repository Contributor Search ###
+### GitHub Organisation Administration ###
 
 # Ignore the contents of the `data` folder, except for the `README.md` file
 data/*

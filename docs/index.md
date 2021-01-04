@@ -1,6 +1,6 @@
-# GitHub Repository Contributor Search documentation
+# GitHub Organisation Administration documentation
 
-Here is the documentation for the GitHub Repository Contributor Search project.
+Here is the documentation for the GitHub Organisation Administration project.
 
 ```{toctree}
 :maxdepth: 2

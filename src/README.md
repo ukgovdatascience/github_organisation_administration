@@ -5,10 +5,7 @@ which is one-level above this folder in the main project directory.
 
 The sub-folders should be used as follows:
 
-- `make_data`: Data processing-related functions;
-- `make_features`: Feature-related functions, for example, functions to create features from processed data;
-- `make_models`: Model-related functions;
-- `make_visualisations`: Functions to produce visualisations; and
+- `make_data`: Data processing-related functions; and
 - `utils`: Utility functions that are helpful in the project.
 
 Feel free to create/rename/delete these folders as required, as they will not be necessary for each and every project.
