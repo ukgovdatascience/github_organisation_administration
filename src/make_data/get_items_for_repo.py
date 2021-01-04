@@ -1,29 +1,24 @@
-from github import Github, NamedUser, PaginatedList
+from github import Github
 from src.utils.logger import Log, logger
-from typing import Dict, Union
+from typing import Any, Dict
 
 
 @Log(logger, level="debug")
-def get_contributors_for_repo(g: Github, repository_name: str) -> Dict[str, Union[PaginatedList.PaginatedList,
-                                                                                  NamedUser.NamedUser]]:
-    """Get all contributors for a GitHub repository.
+def get_items_for_repo(g: Github, method_name: str, repository_name: str) -> Dict[str, Any]:
+    """Get all values of an item for a GitHub repository, where items is the output from `method_name`.
 
     Args:
         g: A `github.Github` class object initialised with a GitHub username and personal access token with the
             necessary permissions.
+        method_name: A method of the github.Repository.Repository class.
         repository_name: A Github repository name.
 
     Returns:
-        A `github.PaginatedList.PaginatedList` or `NamedUser.NamedUser` object containing the contributors in a GitHub
-        repository.
+        A dictionary where the key is the repository name, and the value is the result of executing method_name on a
+        GitHub repository called repository_name.
 
     """
-
-    # Get the repository
-    g_repository = g.get_repo(repository_name)
-
-    # Return a dictionary of the repository name as a key with the contributors as the values
-    return {repository_name: g_repository.get_contributors()}
+    return {repository_name: getattr(g.get_repo(repository_name), method_name)()}
 
 
 if __name__ == "__main__":
@@ -48,4 +43,4 @@ if __name__ == "__main__":
 
     # Get all the contributors for the first repository, and return a dictionary of key-value pairs of repository full
     # names and contributor lists
-    first_repo_contributors = get_contributors_for_repo(github_object, organisation_repository_names[0])
+    first_repo_contributors = get_items_for_repo(github_object, "get_contributors", organisation_repository_names[0])

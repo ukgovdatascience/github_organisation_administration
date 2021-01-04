@@ -97,27 +97,27 @@ def patch_find_organisation_repos_github(mocker) -> MagicMock:
 
 
 @pytest.fixture
-def patch_get_contributors_for_repo_github(mocker) -> MagicMock:
-    """Patch the github.Github class imported into get_contributors_for_repo.py."""
-    return mocker.patch("src.make_data.get_contributors_for_repo.Github")
+def patch_get_items_for_repo_github(mocker) -> MagicMock:
+    """Patch the github.Github class imported into get_items_for_repo.py."""
+    return mocker.patch("src.make_data.get_items_for_repo.Github")
 
 
 @pytest.fixture
-def patch_get_contributors_for_all_repos_github(mocker) -> MagicMock:
-    """Patch the github.Github class imported into get_contributors_for_all_repo.py."""
-    return mocker.patch("src.make_data.get_contributors_for_all_repos.Github")
+def patch_get_items_for_all_repos_github(mocker) -> MagicMock:
+    """Patch the github.Github class imported into get_items_for_all_repo.py."""
+    return mocker.patch("src.make_data.get_items_for_all_repos.Github")
 
 
 @pytest.fixture
-def patch_get_contributors_for_repo(mocker) -> MagicMock:
-    """Patch the get_contributors_for_repo function."""
-    return mocker.patch("src.make_data.get_contributors_for_all_repos.get_contributors_for_repo")
+def patch_get_items_for_repo(mocker) -> MagicMock:
+    """Patch the get_items_for_repo function imported into get_items_for_all_repo.py."""
+    return mocker.patch("src.make_data.get_items_for_all_repos.get_items_for_repo")
 
 
 @pytest.fixture
-def patch_get_contributors_for_all_repos_partial(mocker) -> MagicMock:
-    """Patch the functools.partial function imported into get_contributors_for_all_repos.py"""
-    return mocker.patch("src.make_data.get_contributors_for_all_repos.partial")
+def patch_get_items_for_all_repos_partial(mocker) -> MagicMock:
+    """Patch the functools.partial function imported into get_items_for_all_repo.py"""
+    return mocker.patch("src.make_data.get_items_for_all_repos.partial")
 
 
 @pytest.fixture
