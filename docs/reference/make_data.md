@@ -14,6 +14,17 @@ These `src` package functions generate data.
     :toctree: api/
 
     find_organisation_repos
+
+```
+
+## Helper functions
+
+```{eval-rst}
+.. autosummary::
+    :toctree: api/
+
+    extract_attribute_from_dict_of_paginated_lists
+    extract_attribute_from_paginated_list_elements
     get_items_for_all_repos
     get_items_for_repo
 

@@ -1,3 +1,7 @@
+from src.make_data.extract_attribute_from_dict_of_paginated_lists import (
+    extract_attribute_from_dict_of_paginated_lists,
+    extract_attribute_from_paginated_list_elements
+)
 from src.make_data.find_organisation_repos import find_organisation_repos
 from src.make_data.get_items_for_repo import get_items_for_repo
 from src.make_data.get_items_for_all_repos import get_items_for_all_repos

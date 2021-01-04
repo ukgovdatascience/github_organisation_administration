@@ -136,3 +136,23 @@ def patch_multiprocessing_pool(mocker) -> MagicMock:
 def patch_multiprocessing_pool_enter_imap_unordered(patch_multiprocessing_pool: MagicMock) -> MagicMock:
     """Patch the imap_unordered function within an open multiprocessing.Pool context manager."""
     return patch_multiprocessing_pool.return_value.__enter__.return_value.imap_unordered
+
+
+@pytest.fixture
+def patch_extract_attribute_from_paginated_list_elements(mocker) -> MagicMock:
+    """Patch the extract_attribute_from_paginated_list_elements function."""
+    return mocker.patch("src.make_data.extract_attribute_from_dict_of_paginated_lists."
+                        "extract_attribute_from_paginated_list_elements")
+
+
+@pytest.fixture
+def patch_extract_attribute_from_dict_of_paginated_lists_partial(mocker) -> MagicMock:
+    """Patch the functools.partial function imported into extract_attribute_from_dict_of_paginated_lists.py."""
+    return mocker.patch("src.make_data.extract_attribute_from_dict_of_paginated_lists.partial")
+
+
+@pytest.fixture
+def patch_extract_attribute_from_dict_of_paginated_lists_parallelise_dictionary_processing(mocker) -> MagicMock:
+    """Patch parallelise_dictionary_processing function from extract_attribute_from_dict_of_paginated_lists.py."""
+    return mocker.patch("src.make_data.extract_attribute_from_dict_of_paginated_lists."
+                        "parallelise_dictionary_processing")
