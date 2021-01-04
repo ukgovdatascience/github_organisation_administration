@@ -2,6 +2,7 @@ from functools import partial
 from github import Github, PaginatedList
 from src.make_data.get_items_for_repo import get_items_for_repo
 from src.utils.logger import Log, logger
+from src.utils.parallelise_dictionary_processing import parallelise_dictionary_processing
 from typing import Any, Dict, List
 import multiprocessing as mp
 
@@ -30,20 +31,9 @@ def get_items_for_all_repos(g: Github, method_name: str, repositories: Paginated
     # Partially complete the get_items_for_repo function with g, and method_name
     partial_get_items_for_repo = partial(get_items_for_repo, g, method_name)
 
-    # Calculate the number of chunks to be sent to each process; if this exceeds max_chunksize, set to max_chunksize
-    chunk_size = len(repositories_full_names) / cpu_count
-    chunk_size = min(int(chunk_size) + bool(chunk_size), max_chunksize)
-
-    # Set up a multiprocessing.Pool object, and use it to get items for each repository in parallel
-    with mp.Pool(cpu_count) as pool:
-        mp_items = list(pool.imap_unordered(partial_get_items_for_repo, repositories_full_names, chunksize=chunk_size))
-
-    # Collapse the list of dictionaries in mp_items into a single dictionary - assumes there are no duplicate keys
-    repositories_items = {k: v for d in mp_items for k, v in d.items()}
-
-    # Assert that the above assumption is correct; if so return repositories_items
-    assert len(repositories_items) == len(mp_items), "Repository names are not unique!"
-    return repositories_items
+    # Parallelise the API request, and return the compiled output
+    return parallelise_dictionary_processing(partial_get_items_for_repo, repositories_full_names, cpu_count,
+                                             max_chunksize)
 
 
 if __name__ == "__main__":

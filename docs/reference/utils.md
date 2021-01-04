@@ -13,6 +13,7 @@ These `src` package functions create utility functions.
 .. autosummary::
     :toctree: api/
 
+    parallelise_dictionary_processing
     parse_api_token
 
 ```

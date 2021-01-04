@@ -116,8 +116,14 @@ def patch_get_items_for_repo(mocker) -> MagicMock:
 
 @pytest.fixture
 def patch_get_items_for_all_repos_partial(mocker) -> MagicMock:
-    """Patch the functools.partial function imported into get_items_for_all_repo.py"""
+    """Patch the functools.partial function imported into get_items_for_all_repo.py."""
     return mocker.patch("src.make_data.get_items_for_all_repos.partial")
+
+
+@pytest.fixture
+def patch_get_items_for_all_repo_parallelise_dictionary_processing(mocker) -> MagicMock:
+    """Patch the parallelise_dictionary_processing function imported into get_items_for_all_repo.py."""
+    return mocker.patch("src.make_data.get_items_for_all_repos.parallelise_dictionary_processing")
 
 
 @pytest.fixture
