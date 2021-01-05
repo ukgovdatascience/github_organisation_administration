@@ -24,7 +24,7 @@ class TestGetItemsForAllRepos:
 
     @staticmethod
     def create_list_of_classes_with_full_name(input_list: List[Any]) -> List[object]:
-        """Create a list of MagicMocks with a set attribute based on an input list."""
+        """Create a list of classes with a set attribute based on an input list."""
 
         class ExampleClass:
 

@@ -44,11 +44,8 @@ if __name__ == "__main__":
     # Load required environment variables
     GITHUB_ORGANISATION = os.getenv("GITHUB_ORGANISATION")
 
-    # Get GitHub username and personal access token from a JSON file
-    GITHUB_USER, GITHUB_TOKEN = parse_api_token(os.getenv("GITHUB_API_TOKEN"))
-
     # Instantiate the github.Github class to gain access to GitHub REST APIv3
-    github_object = Github(GITHUB_USER, GITHUB_TOKEN, per_page=100)
+    github_object = Github(*parse_api_token(os.getenv("GITHUB_API_TOKEN")), per_page=100)
 
     # Get all the repositories for GITHUB_ORGANISATION
     organisation_repositories = find_organisation_repos(github_object, GITHUB_ORGANISATION)
