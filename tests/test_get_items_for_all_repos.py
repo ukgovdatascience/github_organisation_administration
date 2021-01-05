@@ -3,7 +3,7 @@ from typing import Any, List
 from unittest.mock import MagicMock
 import pytest
 
-# Define test cases for the TestGetItemsForAllRepos test class
+# Define test cases for the `TestGetItemsForAllRepos` test class
 args_test_get_items_for_all_repos_repositories = [
     ["hello", "world"],
     ["foo", "bar"],
@@ -29,15 +29,10 @@ class TestGetItemsForAllRepos:
         class ExampleClass:
 
             def __init__(self, full_name: str) -> None:
-                """Example class that only has one attribute, `full_name`.
-
-                Args:
-                    full_name: An example full name
-
-                """
+                """Example class that only has one attribute, `full_name`."""
                 self.full_name = full_name
 
-        # Return a list of ExampleClasses based on each element of input_list
+        # Return a list of `ExampleClasses` based on each element of input_list
         return [ExampleClass(e)for e in input_list]
 
     def test_partial_called_correctly(self, patch_get_items_for_all_repos_github: MagicMock,
@@ -46,16 +41,16 @@ class TestGetItemsForAllRepos:
                                       patch_get_items_for_all_repo_parallelise_dictionary_processing: MagicMock,
                                       test_input_method_name: str, test_input_repositories: List[str],
                                       test_input_cpu_count: int, test_input_max_chunksize: int) -> None:
-        """Test that functools.partial function is called once correctly."""
+        """Test that `functools.partial` function is called once correctly."""
 
-        # Execute the get_items_for_all_repos function
+        # Execute the `get_items_for_all_repos` function
         _ = get_items_for_all_repos(patch_get_items_for_all_repos_github,
                                     test_input_method_name,
                                     self.create_list_of_classes_with_full_name(test_input_repositories),
                                     test_input_cpu_count,
                                     test_input_max_chunksize)
 
-        # Assert that functools.partial is called once with the correct arguments
+        # Assert that `functools.partial` is called once with the correct arguments
         patch_get_items_for_all_repos_partial.assert_called_once_with(patch_get_items_for_repo,
                                                                       patch_get_items_for_all_repos_github,
                                                                       test_input_method_name)
@@ -67,16 +62,16 @@ class TestGetItemsForAllRepos:
             test_input_method_name: str, test_input_repositories: List[str], test_input_cpu_count: int,
             test_input_max_chunksize: int
     ) -> None:
-        """Test the parallelise_dictionary_processing function is called once correctly."""
+        """Test the `parallelise_dictionary_processing` function is called once correctly."""
 
-        # Execute the get_items_for_all_repos function
+        # Execute the `get_items_for_all_repos` function
         _ = get_items_for_all_repos(patch_get_items_for_all_repos_github,
                                     test_input_method_name,
                                     self.create_list_of_classes_with_full_name(test_input_repositories),
                                     test_input_cpu_count,
                                     test_input_max_chunksize)
 
-        # Assert that the parallelise_dictionary_processing function is called once correctly
+        # Assert that the `parallelise_dictionary_processing` function is called once correctly
         patch_get_items_for_all_repo_parallelise_dictionary_processing.assert_called_once_with(
             patch_get_items_for_all_repos_partial.return_value, test_input_repositories, test_input_cpu_count,
             test_input_max_chunksize
@@ -89,7 +84,7 @@ class TestGetItemsForAllRepos:
                                test_input_cpu_count: int, test_input_max_chunksize: int) -> None:
         """Test the output of the function is as expected."""
 
-        # Execute the get_items_for_all_repos function
+        # Execute the `get_items_for_all_repos` function
         test_output = get_items_for_all_repos(patch_get_items_for_all_repos_github,
                                               test_input_method_name,
                                               self.create_list_of_classes_with_full_name(test_input_repositories),

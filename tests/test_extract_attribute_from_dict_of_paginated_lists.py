@@ -8,7 +8,7 @@ from typing import Any, Dict, List
 from unittest.mock import MagicMock
 import pytest
 
-# Define test cases for the TestExtractAttributeFromPaginatedListElements test class
+# Define test cases for the `TestExtractAttributeFromPaginatedListElements` test class
 args_test_extract_attribute_from_paginated_list_elements_attribute_name = [
     "hello",
     "world"
@@ -42,14 +42,14 @@ class TestExtractAttributeFromPaginatedListElements:
                 """
                 setattr(self, attribute_name, entry)
 
-        # Return a list of ExampleClasses based on each element of input_list
+        # Return a list of `ExampleClasses` based on each element of input_list
         return [ExampleClass(e)for e in input_list]
 
     @pytest.mark.parametrize("test_input_list", args_test_extract_attribute_from_paginated_list_elements_list)
     def test_returns_correctly_when_no_errors(self, test_input_list: List, test_input_attribute_name: str) -> None:
         """Test that, when no errors are raised, the output is as expected"""
 
-        # Execute the extract_attribute_from_paginated_list_elements function
+        # Execute the `extract_attribute_from_paginated_list_elements` function
         test_output = extract_attribute_from_paginated_list_elements(
             self.create_list_of_classes_with_attribute_name(test_input_list, test_input_attribute_name),
             test_input_attribute_name
@@ -65,24 +65,19 @@ class TestExtractAttributeFromPaginatedListElements:
         class ExampleClass:
 
             def __init__(self, exception: Exception) -> None:
-                """Example class that raises an exception when iterated over.
-
-                Args:
-                    exception: A desired exception
-
-                """
+                """Example class that raises an exception when iterated over."""
                 self.exception = exception
 
             def __iter__(self):
                 raise self.exception
 
-        # Return ExampleClasses with its exception
+        # Return `ExampleClasses` with its exception
         return ExampleClass(exception)
 
     def test_unknownobjectexception_returns_correctly(self, test_input_attribute_name: str) -> None:
-        """Test that the correct output is returned if an UnknownObjectException exception is raised."""
+        """Test that the correct output is returned if an `UnknownObjectException` exception is raised."""
 
-        # Execute the extract_attribute_from_paginated_list_elements function
+        # Execute the `extract_attribute_from_paginated_list_elements` function
         test_output = extract_attribute_from_paginated_list_elements(
             self.create_iterable_raises_exception(UnknownObjectException("Error", 404)), test_input_attribute_name
         )
@@ -100,7 +95,7 @@ class TestExtractAttributeFromPaginatedListElements:
             )
 
 
-# Define test cases for the TestExtractAttributesFromKeyPaginatedListPair test class
+# Define test cases for the `TestExtractAttributesFromKeyPaginatedListPair` test class
 args_test_extract_attributes_from_key_paginated_list_pair = [
     ({"hello": "world", "foo": "bar"}, "hello_world", "hello"),
     ({"hello": "world", "foo": "bar"}, "hello_world", "foo")
@@ -115,13 +110,13 @@ class TestExtractAttributesFromKeyPaginatedListPair:
             self, patch_extract_attribute_from_paginated_list_elements: MagicMock, test_input_pl: Dict[str, Any],
             test_input_attribute_name: str, test_input_dictionary_key: str
     ) -> None:
-        """Test the extract_attribute_from_paginated_list_elements function is called once correctly."""
+        """Test the `extract_attribute_from_paginated_list_elements` function is called once correctly."""
 
-        # Execute the _extract_attributes_from_key_paginated_list_pair function
+        # Execute the `_extract_attributes_from_key_paginated_list_pair` function
         _ = _extract_attributes_from_key_paginated_list_pair(test_input_pl, test_input_attribute_name,
                                                              test_input_dictionary_key)
 
-        # Assert the extract_attribute_from_paginated_list_elements function is called once correctly
+        # Assert the `extract_attribute_from_paginated_list_elements` function is called once correctly
         patch_extract_attribute_from_paginated_list_elements.assert_called_once_with(
             test_input_pl[test_input_dictionary_key], test_input_attribute_name
         )
@@ -131,7 +126,7 @@ class TestExtractAttributesFromKeyPaginatedListPair:
                                test_input_dictionary_key: str) -> None:
         """Test the function returns correctly."""
 
-        # Execute the _extract_attributes_from_key_paginated_list_pair function
+        # Execute the `_extract_attributes_from_key_paginated_list_pair` function
         test_output = _extract_attributes_from_key_paginated_list_pair(test_input_pl, test_input_attribute_name,
                                                                        test_input_dictionary_key)
 
@@ -142,7 +137,7 @@ class TestExtractAttributesFromKeyPaginatedListPair:
         assert test_output == test_expected
 
 
-# Define test cases for the TestExtractAttributeFromDictOfPaginatedLists test class
+# Define test cases for the `TestExtractAttributeFromDictOfPaginatedLists` test class
 args_test_extract_attribute_from_dict_of_paginated_lists = [
     ({"hello": "world", "foo": "bar"}, "hello_world", 2, 50),
     ({"hello": "world", "foo": "bar"}, "hello_world", 6, 100)
@@ -159,13 +154,13 @@ class TestExtractAttributeFromDictOfPaginatedLists:
             test_input_pl: Dict[str, Any], test_input_attribute_name: str, test_input_cpu_count: int,
             test_input_max_chunksize: int
     ) -> None:
-        """Test the function calls functools.partial once with the correct arguments."""
+        """Test the function calls `functools.partial` once with the correct arguments."""
 
-        # Execute the extract_attribute_from_dict_of_paginated_lists function
+        # Execute the `extract_attribute_from_dict_of_paginated_lists` function
         _ = extract_attribute_from_dict_of_paginated_lists(test_input_pl, test_input_attribute_name,
                                                            test_input_cpu_count, test_input_max_chunksize)
 
-        # Assert the functools.partial is called once correctly
+        # Assert the `functools.partial` is called once correctly
         patch_extract_attribute_from_dict_of_paginated_lists_partial.assert_called_once_with(
             _extract_attributes_from_key_paginated_list_pair, test_input_pl, test_input_attribute_name
         )
@@ -176,13 +171,13 @@ class TestExtractAttributeFromDictOfPaginatedLists:
             test_input_pl: Dict[str, Any], test_input_attribute_name: str, test_input_cpu_count: int,
             test_input_max_chunksize: int
     ) -> None:
-        """Test the parallelise_dictionary_processing function is called once correctly."""
+        """Test the `parallelise_dictionary_processing` function is called once correctly."""
 
-        # Execute the extract_attribute_from_dict_of_paginated_lists function
+        # Execute the `extract_attribute_from_dict_of_paginated_lists` function
         _ = extract_attribute_from_dict_of_paginated_lists(test_input_pl, test_input_attribute_name,
                                                            test_input_cpu_count, test_input_max_chunksize)
 
-        # Assert parallelise_dictionary_processing function is called once correctly
+        # Assert `parallelise_dictionary_processing` function is called once correctly
         patch_extract_attribute_from_dict_of_paginated_lists_parallelise_dictionary_processing.assert_called_once_with(
             patch_extract_attribute_from_dict_of_paginated_lists_partial.return_value, test_input_pl.keys(),
             test_input_cpu_count, test_input_max_chunksize
@@ -196,7 +191,7 @@ class TestExtractAttributeFromDictOfPaginatedLists:
     ) -> None:
         """Test the function returns correctly."""
 
-        # Execute the extract_attribute_from_dict_of_paginated_lists function
+        # Execute the `extract_attribute_from_dict_of_paginated_lists` function
         test_output = extract_attribute_from_dict_of_paginated_lists(test_input_pl, test_input_attribute_name,
                                                                      test_input_cpu_count, test_input_max_chunksize)
 
