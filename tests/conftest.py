@@ -156,3 +156,23 @@ def patch_extract_attribute_from_dict_of_paginated_lists_parallelise_dictionary_
     """Patch `parallelise_dictionary_processing` function from extract_attribute_from_dict_of_paginated_lists.py."""
     return mocker.patch("src.make_data.extract_attribute_from_dict_of_paginated_lists."
                         "parallelise_dictionary_processing")
+
+
+@pytest.fixture
+def patch_add_team_with_permissions_extract_attribute_from_paginated_list_elements(mocker) -> MagicMock:
+    """Patch the extract_attribute_from_paginated_list_elements function."""
+    return mocker.patch("src.make_data.add_team_with_permissions_to_all_repositories."
+                        "extract_attribute_from_paginated_list_elements")
+
+
+@pytest.fixture
+def patch_check_team_added_already(mocker) -> MagicMock:
+    """Patch the `check_team_added_already` function."""
+    return mocker.patch("src.make_data.add_team_with_permissions_to_all_repositories.check_team_added_already")
+
+
+@pytest.fixture
+def patch_add_team_with_permissions_to_repository(mocker) -> MagicMock:
+    """Patch the `check_team_added_already` function."""
+    return mocker.patch("src.make_data.add_team_with_permissions_to_all_repositories."
+                        "add_team_with_permissions_to_repository")

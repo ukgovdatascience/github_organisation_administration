@@ -1,3 +1,8 @@
+from src.make_data.add_team_with_permissions_to_all_repositories import (
+    add_team_with_permissions_to_all_repositories,
+    add_team_with_permissions_to_repository,
+    check_team_added_already
+)
 from src.make_data.extract_attribute_from_dict_of_paginated_lists import (
     extract_attribute_from_dict_of_paginated_lists,
     extract_attribute_from_paginated_list_elements

@@ -17,6 +17,18 @@ These `src` package functions generate data.
 
 ```
 
+## GitHub teams
+
+```{eval-rst}
+.. autosummary::
+    :toctree: api/
+
+    add_team_with_permissions_to_all_repositories
+    add_team_with_permissions_to_repository
+    check_team_added_already
+
+```
+
 ## Helper functions
 
 ```{eval-rst}
