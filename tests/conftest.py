@@ -176,3 +176,21 @@ def patch_add_team_with_permissions_to_repository(mocker) -> MagicMock:
     """Patch the `check_team_added_already` function."""
     return mocker.patch("src.make_data.add_team_with_permissions_to_all_repositories."
                         "add_team_with_permissions_to_repository")
+
+
+@pytest.fixture
+def patch_parallelise_processing(mocker) -> MagicMock:
+    """Patch the `parallelise_processing` function."""
+    return mocker.patch("src.utils.parallelise_dictionary_processing.parallelise_processing")
+
+
+@pytest.fixture
+def patch_add_team_with_permissions_to_all_repositories_partial(mocker) -> MagicMock:
+    """Patch the `functools.partial` function imported into add_team_with_permissions_to_all_repositories.py."""
+    return mocker.patch("src.make_data.add_team_with_permissions_to_all_repositories.partial")
+
+
+@pytest.fixture
+def patch_add_team_with_permissions_to_all_repositories_parallelise_processing(mocker) -> MagicMock:
+    """Patch `parallelise_processing` function from add_team_with_permissions_to_all_repositories.py."""
+    return mocker.patch("src.make_data.add_team_with_permissions_to_all_repositories.parallelise_processing")

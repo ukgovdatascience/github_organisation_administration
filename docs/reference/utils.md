@@ -14,6 +14,7 @@ These `src` package functions create utility functions.
     :toctree: api/
 
     parallelise_dictionary_processing
+    parallelise_processing
     parse_api_token
 
 ```

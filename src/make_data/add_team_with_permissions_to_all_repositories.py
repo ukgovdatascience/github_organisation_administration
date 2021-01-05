@@ -1,6 +1,9 @@
+from functools import partial
 from github import PaginatedList, Repository, Team
-from src.utils.logger import Log, logger
 from src.make_data.extract_attribute_from_dict_of_paginated_lists import extract_attribute_from_paginated_list_elements
+from src.utils.logger import Log, logger
+from src.utils.parallelise_dictionary_processing import parallelise_processing
+import multiprocessing as mp
 
 
 @Log(logger, level="debug")
@@ -20,15 +23,16 @@ def check_team_added_already(team_name: str, repository: Repository.Repository) 
 
 
 @Log(logger, level="debug")
-def add_team_with_permissions_to_repository(team: Team.Team, repository: Repository.Repository, permission) -> None:
+def add_team_with_permissions_to_repository(team: Team.Team, permission: str,
+                                            repository: Repository.Repository) -> None:
     """Add a team to a GitHub repository if it isn't already added, and set its permission level.
 
     Args:
         team: A `github.Team.Team` object containing the GitHub organisation team to add to the repository with set
             permissions.
-        repository: A `github.Repository.Repository` object containing the GitHub organisation repository of interest.
         permission: A permission level to provide the `team` within `repository`. See the `GitHub API documentation`_
             for possible options.
+        repository: A `github.Repository.Repository` object containing the GitHub organisation repository of interest.
 
     Returns:
         None. `repository` will have `team` with `permission` access to it.
@@ -47,17 +51,20 @@ def add_team_with_permissions_to_repository(team: Team.Team, repository: Reposit
 
 
 @Log(logger)
-def add_team_with_permissions_to_all_repositories(team: Team.Team, repositories: PaginatedList.PaginatedList,
-                                                  permission: str = "admin") -> None:
+def add_team_with_permissions_to_all_repositories(team: Team.Team, permission: str,
+                                                  repositories: PaginatedList.PaginatedList,
+                                                  cpu_count: int = mp.cpu_count(), max_chunksize: int = 1000) -> None:
     """Add a team to a list of GitHub repositories if it isn't already added, and set its permission level.
 
     Args:
         team: A `github.Team.Team` object containing the GitHub organisation team to add to the repository with set
             permissions.
+        permission: A permission level to provide the `team` within `repository`. See the `GitHub API
+            documentation`_ for possible options.
         repositories: A `github.PaginatedList.PaginatedList` objects containing `github.Repository.Repository`
             objects of the GitHub organisation repositories.
-        permission: Default: "admin". A permission level to provide the `team` within `repository`. See the `GitHub API
-            documentation`_ for possible options.
+        cpu_count: Default: maximum number of CPUs. The number of CPUs to parallelise the processing.
+        max_chunksize: Default: 1000. The maximum number of iterables per CPU.
 
     Returns:
         None. Each repository in `repositories` will have `team` with `permission` access to it.
@@ -66,5 +73,9 @@ def add_team_with_permissions_to_all_repositories(team: Team.Team, repositories:
         https://docs.github.com/en/free-pro-team@latest/rest/reference/teams#add-or-update-team-repository-permissions
 
     """
-    for r in repositories:
-        add_team_with_permissions_to_repository(team, r, permission)
+
+    # Partially complete the first two arguments of the `add_team_with_permissions_to_repository` function
+    partial_add_team_with_permissions_to_repository = partial(add_team_with_permissions_to_repository, team, permission)
+
+    # Parallelise the request to set all repositories with `team` having `permission` permissions
+    _ = parallelise_processing(partial_add_team_with_permissions_to_repository, repositories, cpu_count, max_chunksize)

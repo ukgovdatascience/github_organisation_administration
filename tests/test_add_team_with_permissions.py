@@ -101,13 +101,13 @@ args_test_add_team_with_permissions_to_repository = [
 ]
 
 
-@pytest.mark.parametrize("test_input_team_name, test_input_repository, test_input_permission, test_input_check",
+@pytest.mark.parametrize("test_input_team_name, test_input_permission, test_input_repository, test_input_check",
                          args_test_add_team_with_permissions_to_repository)
 class TestAddTeamWithPermissionsToRepository:
 
     def test_check_team_added_already_called_once_correctly(
-            self, patch_check_team_added_already: MagicMock, test_input_team_name: str, test_input_repository: str,
-            test_input_permission: str, test_input_check: bool
+            self, patch_check_team_added_already: MagicMock, test_input_team_name: str, test_input_permission: str,
+            test_input_repository: str, test_input_check: bool
     ) -> None:
         """Test the `check_team_added_already` function is called once correctly."""
 
@@ -115,15 +115,15 @@ class TestAddTeamWithPermissionsToRepository:
         patch_check_team_added_already.return_value = test_input_check
 
         # Execute the `add_team_with_permissions_to_repository` function
-        add_team_with_permissions_to_repository(ExampleTeamClass(test_input_team_name), test_input_repository,
-                                                test_input_permission)
+        add_team_with_permissions_to_repository(ExampleTeamClass(test_input_team_name), test_input_permission,
+                                                test_input_repository)
 
         # Assert that the `check_team_added_already` function is called once correctly
         patch_check_team_added_already.assert_called_once_with(test_input_team_name, test_input_repository)
 
     def test_add_to_repos_called_only_if_check_team_added_already_false(
-            self, patch_check_team_added_already: MagicMock, test_input_team_name: str, test_input_repository: str,
-            test_input_permission: str, test_input_check: bool
+            self, patch_check_team_added_already: MagicMock, test_input_team_name: str, test_input_permission: str,
+            test_input_repository: str, test_input_check: bool
     ) -> None:
         """Test that the `add_to_repos` method is called once correctly only if `check_team_added_already` is False."""
 
@@ -135,7 +135,7 @@ class TestAddTeamWithPermissionsToRepository:
         test_input_team.name = test_input_team_name
 
         # Execute the `add_team_with_permissions_to_repository` function
-        add_team_with_permissions_to_repository(test_input_team, test_input_repository, test_input_permission)
+        add_team_with_permissions_to_repository(test_input_team, test_input_permission, test_input_repository)
 
         # Assert that the `add_to_repos` method is not called if `check_team_added_already` returns True, otherwise
         # check it is called once correctly
@@ -145,8 +145,8 @@ class TestAddTeamWithPermissionsToRepository:
             test_input_team.add_to_repos.assert_called_once_with(test_input_repository)
 
     def test_set_repo_permission_called_once_correctly(
-            self, patch_check_team_added_already: MagicMock, test_input_team_name: str, test_input_repository: str,
-            test_input_permission: str, test_input_check: bool
+            self, patch_check_team_added_already: MagicMock, test_input_team_name: str, test_input_permission: str,
+            test_input_repository: str, test_input_check: bool
     ) -> None:
         """Test that the `set_repo_permission` method is called once correctly."""
 
@@ -158,7 +158,7 @@ class TestAddTeamWithPermissionsToRepository:
         test_input_team.name = test_input_team_name
 
         # Execute the `add_team_with_permissions_to_repository` function
-        add_team_with_permissions_to_repository(test_input_team, test_input_repository, test_input_permission)
+        add_team_with_permissions_to_repository(test_input_team, test_input_permission, test_input_repository)
 
         # Assert the `set_repo_permission` method is called once correctly
         test_input_team.set_repo_permission.assert_called_once_with(test_input_repository, test_input_permission)
@@ -166,34 +166,48 @@ class TestAddTeamWithPermissionsToRepository:
 
 # Define test cases for the `TestAddTeamWithPermissionsToAllRepositories` test class
 args_test_add_team_with_permissions_to_all_repositories = [
-    ("hello", ["world", "foo", "bar"], "hello_world"),
-    ("world", ["foo", "bar", "hello_world", "foo_bar"], "hello")
+    ("hello", "world", ["foo", "bar", "hello_world"], 2, 4),
+    ("world", "foo", ["bar", "hello_world", "foo_bar", "hello"], 1, 3)
 ]
 
 
-@pytest.mark.parametrize("test_input_team, test_input_repositories, test_input_permission",
-                         args_test_add_team_with_permissions_to_all_repositories)
+@pytest.mark.parametrize("test_input_team, test_input_permission, test_input_repositories, test_input_cpu_count, "
+                         "test_input_max_chunksize", args_test_add_team_with_permissions_to_all_repositories)
 class TestAddTeamWithPermissionsToAllRepositories:
 
-    def test_add_team_with_permissions_to_repository_called_correctly(
-            self, patch_add_team_with_permissions_to_repository: MagicMock, test_input_team: str,
-            test_input_repositories: List[str], test_input_permission: str
+    def test_partial_called_once_correctly(
+            self, patch_add_team_with_permissions_to_all_repositories_partial: MagicMock,
+            patch_add_team_with_permissions_to_repository: MagicMock,
+            patch_add_team_with_permissions_to_all_repositories_parallelise_processing: MagicMock,
+            test_input_team: str, test_input_permission: str, test_input_repositories: List[str],
+            test_input_cpu_count: int, test_input_max_chunksize: int
     ) -> None:
-        """Test that the `add_team_with_permissions_to_repository` is called correctly."""
+        """Test that `functools.partial` function is called once correctly."""
 
         # Execute the `add_team_with_permissions_to_all_repositories` function
-        add_team_with_permissions_to_all_repositories(test_input_team, test_input_repositories, test_input_permission)
+        add_team_with_permissions_to_all_repositories(test_input_team, test_input_permission, test_input_repositories,
+                                                      test_input_cpu_count, test_input_max_chunksize)
 
-        # Assert that `add_team_with_permissions_to_repository` is called the correct number of times
-        assert patch_add_team_with_permissions_to_repository.call_count == len(test_input_repositories)
+        # Assert that `functools.partial` is called once with the correct arguments
+        patch_add_team_with_permissions_to_all_repositories_partial.assert_called_once_with(
+            patch_add_team_with_permissions_to_repository, test_input_team, test_input_permission
+        )
 
-        # Create an iterable from `test_input_repositories`
-        test_input_repositories_iterable = iter(test_input_repositories)
+    def test_parallelise_processing_called_once_correctly(
+            self, patch_add_team_with_permissions_to_all_repositories_partial: MagicMock,
+            patch_add_team_with_permissions_to_repository: MagicMock,
+            patch_add_team_with_permissions_to_all_repositories_parallelise_processing: MagicMock,
+            test_input_team: str, test_input_permission: str, test_input_repositories: List[str],
+            test_input_cpu_count: int, test_input_max_chunksize: int
+    ) -> None:
+        """Test that `parallelise_processing` function is called once correctly."""
 
-        # Get the call arguments list to `add_team_with_permissions_to_repository`
-        test_output_call_args_list = patch_add_team_with_permissions_to_repository.call_args_list
+        # Execute the `add_team_with_permissions_to_all_repositories` function
+        add_team_with_permissions_to_all_repositories(test_input_team, test_input_permission, test_input_repositories,
+                                                      test_input_cpu_count, test_input_max_chunksize)
 
-        # Iterate over each call, and assert they are as expected
-        for test_output_args, test_output_kwargs in test_output_call_args_list:
-            assert test_output_args == (test_input_team, next(test_input_repositories_iterable), test_input_permission)
-            assert not test_output_kwargs
+        # Assert that `parallelise_processing` is called once with the correct arguments
+        patch_add_team_with_permissions_to_all_repositories_parallelise_processing.assert_called_once_with(
+            patch_add_team_with_permissions_to_all_repositories_partial.return_value, test_input_repositories,
+            test_input_cpu_count, test_input_max_chunksize
+        )
