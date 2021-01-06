@@ -1,6 +1,8 @@
 # `GitHub Organisation Administration`
 
-Use GitHub REST API v3 to do administration tasks within a GitHub organisation.
+Use GitHub REST API v3 to do administration tasks within a GitHub organisation. The main aim of this project is prevent
+accidental access loss to organisation repositories when individuals leave the organisation by programatically adding,
+and setting team permissions across multiple repositories.
 
 > ℹ️ Where this documentation refers to the **root folder** we mean where this README.md is located.
 
@@ -13,7 +15,10 @@ Use GitHub REST API v3 to do administration tasks within a GitHub organisation.
 
 ## Getting started
 
-> ⚠️ You can only complete tasks where your GitHub username has administrator privileges.
+> ⚠️ You can only complete tasks where your GitHub username has organisation owner and/or repository administrator
+> privileges.
+
+> ❗️ Some actions, such as setting team permissions can be **destructive**. Take care when using them!
 
 To get started, make sure your system meets the [requirements](#requirements), and you have
 [set up all secrets, and credentials](#required-secrets-and-credentials).
@@ -52,27 +57,21 @@ organisation_repositories = find_organisation_repos(g, os.getenv("GITHUB_ORGANIS
 # Get all the contributors for these repositories
 organisation_contributors = get_items_for_all_repos(g, "get_contributors", organisation_repositories)
 
-# Print the contributors names in each repository
-print(extract_attribute_from_dict_of_paginated_lists(organisation_contributors, "name"))
+# Show the contributors names in each repository
+extract_attribute_from_dict_of_paginated_lists(organisation_contributors, "name")
 ```
 
-It's straightforward to get other information about repositories. For example, to get all teams across all organisation
-repositories, modify the last two lines of the previous code block to:
-
-```python
-# Get all the teams for these repositories
-organisation_teams = get_items_for_all_repos(g, "get_teams", organisation_repositories)
-
-# Print the team names in each repository
-print(extract_attribute_from_dict_of_paginated_lists(organisation_teams, "name"))
-```
+For more information, see the example notebooks in the [`notebooks`][notebooks] folder.
 
 ### Requirements
 
 - A `.secrets` file with the [required secrets and credentials](#required-secrets-and-credentials)
 - [Load environment variables][docs-loading-environment-variables] from `.envrc`
-- Python 3.8 or later
+- Python 3.8 or later with a virtual environment set up
 - All packages from [`requirements.txt`][requirements] installed in your environment
+  - For ease, open your terminal and run the Make command `make requirements`, which will install package requirements
+    as well as [pre-commit hooks][docs-pre-commit-hooks] to prevent committing of secrets, Jupyter notebook outputs,
+    and large files
 
 ## Required secrets and credentials
 
@@ -112,13 +111,15 @@ If you want to help us build, and improve `GitHub Organisation Administration`, 
 
 ## Acknowledgements
 
-This project structure is based on the `govcookiecutter` template project.
+This project structure is based on the [`govcookiecutter`][govcookiecutter] template project.
 
 [contributing]: ./CONTRIBUTING.md
 [govcookiecutter]: https://github.com/ukgovdatascience/govcookiecutter
 [docs-github-token]: ./docs/user_guide/creating_github_api_token_json.md
 [docs-loading-environment-variables]: ./docs/user_guide/loading_environment_variables.md
 [docs-loading-environment-variables-secrets]: ./docs/user_guide/loading_environment_variables.md#storing-secrets-and-credentials
+[docs-pre-commit-hooks]: ./docs/contributor_guide/pre_commit_hooks.md
+[notebooks]: ./notebooks
 [pre-commit]: https://pre-commit.com/
 [pygithub]: https://pygithub.readthedocs.io/
 [requirements]: ./requirements.txt

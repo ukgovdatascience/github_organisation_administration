@@ -18,10 +18,12 @@ This pull/merge request meets the following requirements:
 
 - [ ] Code runs
 - [ ] Developments are **secure** and [**ethical**][data-ethics-framework]
+- [ ] Developments follow the AQA plan (see `docs/aqa/aqa_plan.md`)
 - [ ] You have made proportionate checks that the code works correctly
 - [ ] Test suite passes
 - [ ] Assumptions, and caveats log updated (see `docs/aqa/assumptions_caveats.md`), if necessary
-- [ ] [Minimum usable documentation][agilemodeling] written in the `docs` folder
+- [ ] [Minimum usable documentation][agilemodeling] written in the `docs` folder, and in other Markdown files where
+      relevant
 
 Comments have been added below around the incomplete checks.
 
