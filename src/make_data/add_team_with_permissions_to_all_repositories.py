@@ -3,6 +3,7 @@ from github import PaginatedList, Repository, Team
 from src.make_data.extract_attribute_from_dict_of_paginated_lists import extract_attribute_from_paginated_list_elements
 from src.utils.logger import Log, logger
 from src.utils.parallelise_dictionary_processing import parallelise_processing
+from typing import List, Union
 import multiprocessing as mp
 
 
@@ -52,7 +53,7 @@ def add_team_with_permissions_to_repository(team: Team.Team, permission: str,
 
 @Log(logger)
 def add_team_with_permissions_to_all_repositories(team: Team.Team, permission: str,
-                                                  repositories: PaginatedList.PaginatedList,
+                                                  repositories: Union[List, PaginatedList.PaginatedList],
                                                   cpu_count: int = mp.cpu_count(), max_chunksize: int = 1000) -> None:
     """Add a team to a list of GitHub repositories if it isn't already added, and set its permission level.
 
@@ -61,7 +62,7 @@ def add_team_with_permissions_to_all_repositories(team: Team.Team, permission: s
             permissions.
         permission: A permission level to provide the `team` within `repository`. See the `GitHub API
             documentation`_ for possible options.
-        repositories: A `github.PaginatedList.PaginatedList` objects containing `github.Repository.Repository`
+        repositories: A list or `github.PaginatedList.PaginatedList` objects containing `github.Repository.Repository`
             objects of the GitHub organisation repositories.
         cpu_count: Default: maximum number of CPUs. The number of CPUs to parallelise the processing.
         max_chunksize: Default: 1000. The maximum number of iterables per CPU.

@@ -3,12 +3,12 @@ from github import Github, PaginatedList
 from src.make_data.get_items_for_repo import get_items_for_repo
 from src.utils.logger import Log, logger
 from src.utils.parallelise_dictionary_processing import parallelise_dictionary_processing
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 import multiprocessing as mp
 
 
 @Log(logger)
-def get_items_for_all_repos(g: Github, method_name: str, repositories: PaginatedList.PaginatedList,
+def get_items_for_all_repos(g: Github, method_name: str, repositories: Union[List, PaginatedList.PaginatedList],
                             cpu_count: int = mp.cpu_count(), max_chunksize: int = 1000) -> Dict[str, List[Any]]:
     """Get all the items for a list of GitHub repositories, where items is the output from `method_name`.
 
@@ -16,7 +16,8 @@ def get_items_for_all_repos(g: Github, method_name: str, repositories: Paginated
         g: A `github.Github` class object initialised with a GitHub username and personal access token with the
             necessary permissions.
         method_name: A method of the github.Repository.Repository class.
-        repositories: A list of GitHub repositories as a `github.PaginatedList.PaginatedList` object.
+        repositories: A list of `github.Repository.Repository` repositories as a list or
+            `github.PaginatedList.PaginatedList` object.
         cpu_count: Default: maximum number of CPUs. The number of CPUs to parallelise the API requests.
         max_chunksize: Default: 1000. The maximum number of repositories per CPU to call.
 
