@@ -82,14 +82,13 @@ if __name__ == "__main__":
     from github import Github
     from src.make_data.find_organisation_repos import find_organisation_repos
     from src.make_data.get_items_for_all_repos import get_items_for_all_repos
-    from src.utils.parse_api_token import parse_api_token
     import os
 
     # Load required environment variables
     GITHUB_ORGANISATION = os.getenv("GITHUB_ORGANISATION")
 
     # Instantiate the github.Github class to gain access to GitHub REST APIv3
-    github_object = Github(*parse_api_token(os.getenv("GITHUB_API_TOKEN")), per_page=100)
+    github_object = Github(os.getenv("GITHUB_API_TOKEN"), per_page=100)
 
     # Get all the repositories for GITHUB_ORGANISATION
     organisation_repositories = find_organisation_repos(github_object, GITHUB_ORGANISATION)

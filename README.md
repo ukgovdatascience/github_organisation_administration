@@ -32,7 +32,6 @@ of the [Sphinx documentation](#viewing-the-documentation).
 
 The functions can:
 
-- Parse your API token JSON file (`src.parse_api_token`)
 - Find all repositories in a GitHub organisation (`src.find_organisation_repos`)
 - Get information from a PyGithub single repositories (`src.get_items_for_repo`)
 - Get information from a PyGithub paginated list of repositories (`src.get_items_for_all_repos`)
@@ -43,13 +42,11 @@ Here is an example of getting the names of all contributors across all organisat
 
 ```python
 from github import Github
-from src import (
-  extract_attribute_from_dict_of_paginated_lists, find_organisation_repos, get_items_for_all_repos, parse_api_token
-)
+from src import extract_attribute_from_dict_of_paginated_lists, find_organisation_repos, get_items_for_all_repos
 import os
 
 # Instantiate the github.Github class to gain access to GitHub REST APIv3 via your GitHub personal access token
-g = Github(*parse_api_token(os.getenv("GITHUB_API_TOKEN")), per_page=100)
+g = Github(os.getenv("GITHUB_API_TOKEN"), per_page=100)
 
 # Get all the repositories for your GitHub organisation
 organisation_repositories = find_organisation_repos(g, os.getenv("GITHUB_ORGANISATION"))
@@ -115,7 +112,7 @@ This project structure is based on the [`govcookiecutter`][govcookiecutter] temp
 
 [contributing]: ./CONTRIBUTING.md
 [govcookiecutter]: https://github.com/ukgovdatascience/govcookiecutter
-[docs-github-token]: ./docs/user_guide/creating_github_api_token_json.md
+[docs-github-token]: docs/user_guide/creating_github_api_token.md
 [docs-loading-environment-variables]: ./docs/user_guide/loading_environment_variables.md
 [docs-loading-environment-variables-secrets]: ./docs/user_guide/loading_environment_variables.md#storing-secrets-and-credentials
 [docs-pre-commit-hooks]: ./docs/contributor_guide/pre_commit_hooks.md
