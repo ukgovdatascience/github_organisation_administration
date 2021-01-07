@@ -22,7 +22,7 @@ Once you have [obtained your GitHub personal acccess token](#getting-a-github-pe
 `.secrets` file in this repository. Add the following line:
 
 ```{code-block} shell
-export GITHUB_API_TOKEN=<<<YOUR GITHUB PERSONAL ACCESS TOKEN>>>
+export GITHUB_API_KEY=<<<YOUR GITHUB PERSONAL ACCESS TOKEN>>>
 ```
 
 where `<<<YOUR GITHUB PERSONAL ACCESS TOKEN>>>` is your token. Save the file, and update the loaded environment

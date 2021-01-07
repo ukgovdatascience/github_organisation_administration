@@ -29,7 +29,7 @@ if __name__ == "__main__":
     GITHUB_ORGANISATION = os.getenv("GITHUB_ORGANISATION")
 
     # Instantiate the github.Github class to gain access to GitHub REST APIv3
-    github_object = Github(os.getenv("GITHUB_API_TOKEN"), per_page=100)
+    github_object = Github(os.getenv("GITHUB_API_KEY"), per_page=100)
 
     # Get all the repositories for GITHUB_ORGANISATION
     organisation_repositories = find_organisation_repos(github_object, GITHUB_ORGANISATION)

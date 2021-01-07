@@ -40,13 +40,16 @@ The functions can:
 
 Here is an example of getting the names of all contributors across all organisation repositories:
 
+> ⚠️ Note that, because the `name` attribute is not in the [API response][github-contributors] for getting repository
+contributors, PyGithub will send another API GET request for each contributor to obtain their name!
+
 ```python
 from github import Github
 from src import extract_attribute_from_dict_of_paginated_lists, find_organisation_repos, get_items_for_all_repos
 import os
 
 # Instantiate the github.Github class to gain access to GitHub REST APIv3 via your GitHub personal access token
-g = Github(os.getenv("GITHUB_API_TOKEN"), per_page=100)
+g = Github(os.getenv("GITHUB_API_KEY"), per_page=100)
 
 # Get all the repositories for your GitHub organisation
 organisation_repositories = find_organisation_repos(g, os.getenv("GITHUB_ORGANISATION"))
@@ -78,7 +81,7 @@ the following environment variable name(s):
 
 | Secret/credential              | Environment variable name | Description                                                 |
 |--------------------------------|---------------------------|-------------------------------------------------------------|
-| GitHub personal access token   | `GITHUB_API_TOKEN`        | See [here][docs-github-token] for further information       |
+| GitHub personal access token   | `GITHUB_API_KEY`          | See [here][docs-github-token] for further information       |
 | GitHub organisation name       | `GITHUB_ORGANISATION`     | The GitHub organisation name, e.g. `ukgovdatascience`       |
 | GitHub organisation admin team | `GITHUB_ADMIN_TEAM_SLUG`  | The GitHub team name that should have repo admin privileges |
 
@@ -116,6 +119,7 @@ This project structure is based on the [`govcookiecutter`][govcookiecutter] temp
 [docs-loading-environment-variables]: ./docs/user_guide/loading_environment_variables.md
 [docs-loading-environment-variables-secrets]: ./docs/user_guide/loading_environment_variables.md#storing-secrets-and-credentials
 [docs-pre-commit-hooks]: ./docs/contributor_guide/pre_commit_hooks.md
+[github-contributors]: https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#list-repository-contributors
 [notebooks]: ./notebooks
 [pre-commit]: https://pre-commit.com/
 [pygithub]: https://pygithub.readthedocs.io/
