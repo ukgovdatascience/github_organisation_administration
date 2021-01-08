@@ -1,6 +1,6 @@
 # Contributing guide
 
-This is the contributor guide for the `github-repository-contributor-search` project.
+This is the contributor guide for the `github-organisation-administration` project.
 
 ```{toctree}
 :maxdepth: 2

@@ -1,4 +1,4 @@
-# Code of conduct for `github-repository-contributor-search`
+# Code of conduct for `github-organisation-administration`
 
 Contributors to this repository hosted by `ukgovdatascience` are expected to follow the Contributor
 Covenant Code of Conduct, and those working within Her Majesty's Government are also expected to follow the Civil
@@ -14,7 +14,7 @@ The Civil Service Code can be found [here][civil-service-code].
 
 Where this Code of Conduct says:
 
-- "Project", we mean this `github-repository-contributor-search` GitHub repository;
+- "Project", we mean this `github-organisation-administration` GitHub repository;
 - "Maintainer", we mean the `ukgovdatascience` organisation owners; and
 - "Leadership", we mean both `ukgovdatascience` organisation owners, line managers, and other
   leadership within Government Digital Service.

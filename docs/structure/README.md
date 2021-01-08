@@ -1,4 +1,4 @@
-# `github-repository-contributor-search` structure
+# `github-organisation-administration` structure
 
 This page provides information on the repository's structure.
 
@@ -36,7 +36,7 @@ coverage html
 ```
 
 a code coverage report in HTML will be produced on the code in the [hooks][docs-hooks], and
-`github-repository-contributor-search/src` folders. This HTMl report can be accessed at `htmlcov/index.html`.
+`github-organisation-administration/src` folders. This HTMl report can be accessed at `htmlcov/index.html`.
 
 ### `.envrc`
 
@@ -87,6 +87,10 @@ the user deliberately wishes to commit the to repository.
 The [Code of Conduct][code-of-conduct] for contributors to this project, including maintainers and `ukgovdatascience`
 organisation owners.
 
+### `conftest.py`
+
+File to contain shared fixture functions for the [pytest][pytest] tests in the `tests` folder.
+
 ### `CONTRIBUTING.md`
 
 The [contributing guidelines][contributing] for this project.
@@ -109,7 +113,7 @@ make help
 ### `pytest.ini`
 
 A file containing configuration settings for the [`pytest`][pytest] Python package. To run tests within the
-[`tests`][docs-tests], and `github-repository-contributor-search/tests` folders, execute the following
+[`tests`][docs-tests], and `github-organisation-administration/tests` folders, execute the following
 command:
 
 ```shell
