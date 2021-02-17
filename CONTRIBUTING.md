@@ -82,7 +82,13 @@ Code coverage of Python scripts is measured using the [`coverage`][coverage] Pyt
 found in `.coveragerc`. Note coverage only extends to Python scripts in the `hooks`, and
 `github-repository-contributor-search/src` folders.
 
-To run code coverage, and view it as a HTML report, execute the following commands in your terminal:
+To run code coverage, and view it as a HTML report, execute the following command in your terminal:
+
+```shell
+make coverage_html
+```
+
+This is essentially equivalent to running the following commands:
 
 ```shell
 coverage run -m pytest

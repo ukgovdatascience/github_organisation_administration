@@ -6,9 +6,5 @@ in `src.*` namespace are public.
 ```{toctree}
 :maxdepth: 2
 ./make_data.md
-./make_features.md
-./make_models.md
-./make_visualisations.md
 ./utils.md
-./src.md
 ```

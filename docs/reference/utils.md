@@ -7,6 +7,17 @@ These `src` package functions create utility functions.
 .. currentmodule:: src
 ```
 
+## API helper functions
+
+```{eval-rst}
+.. autosummary::
+    :toctree: api/
+
+    parallelise_dictionary_processing
+    parallelise_processing
+
+```
+
 ## Logging
 
 ```{eval-rst}

@@ -1,4 +1,4 @@
-# Assumptions and caveats Log
+# Assumptions and caveats log
 
 This log contains a list of assumptions and caveats used in this analysis.
 
@@ -41,16 +41,28 @@ The log contains the following assumptions and caveats:
 :depth: 1
 ```
 
-### Assumption 1: Insert plain English title here
+### Assumption 1: Functions and documentation limited to getting repositories, contributors, teams, and setting team permissions for main purpose of project
 
-* **Quality**: Insert RAG rating here
-* **Impact**: Insert RAG rating here
+- **Quality**: GREEN
+- **Impact**: GREEN
 
-Add plain English description here.
+The main aim of this work is to prevent accidental loss of admin privileges to GitHub organisation repositories when an
+individual contributor leaves the organisation. It does this by setting a GitHub organisation team's permissions
+wholesale across a number of organisation repositories.
 
-### Assumption 2: Insert plain English title here
+In some specialised cases, we may want to find a limited set of organisation repositories which have a specific
+contributor(s), before setting the team permissions. This is why functions to get contributor and team information has
+been added.
 
-* **Quality**: Insert RAG rating here
-* **Impact**: Insert RAG rating here
+As such, all the functions and documentation are limited to this purpose, although they could be conceivably extended
+and/or used for ulterior purposes.
 
-Add plain English description here.
+### Assumption 2: `get_items_for_all_repos.py`, `get_items_for_repo.py` functions limited to main purpose of project
+
+- **Quality**: GREEN
+- **Impact**: GREEN
+
+Following on from [another assumption](#assumption-1-functions-and-documentation-limited-to-getting-repositories-contributors-teams-and-setting-team-permissions-for-main-purpose-of-project),
+the functions in the `get_items_for_all_repos.py`, `get_items_for_repo.py` scripts in the `src/make_data` folder do not
+accept attribute names that require further arguments or keyword arguments, as this is not required for the main
+purpose of this project.

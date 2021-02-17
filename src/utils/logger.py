@@ -112,4 +112,4 @@ class Log(object):
 
 
 # Create the logger
-logger = create_logger("src", os.path.join(os.getenv("DIR_DATA_LOGS"), "github-repository-contributor-search.log"))
+logger = create_logger("src", os.path.join(os.getenv("DIR_DATA_LOGS"), "github_organisation_administration.log"))

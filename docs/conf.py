@@ -1,4 +1,4 @@
-# GitHub Repository Contributor Search documentation build configuration file
+# GitHub Organisation Administration documentation build configuration file
 #
 # This file is execfile()d with the current directory set to its containing dir.
 #
@@ -45,7 +45,7 @@ source_suffix = {
 master_doc = "index"
 
 # General information about the project.
-project = "GitHub Repository Contributor Search"
+project = "GitHub Organisation Administration"
 author = "ukgovdatascience"
 
 # The version info for the project you're documenting, acts as replacement for |version| and |release|, also used in
@@ -209,8 +209,8 @@ latex_elements = {
 # documentclass [howto, manual, or own class]).
 latex_documents = [
     ("index",
-     "github-repository-contributor-search.tex",
-     u"GitHub Repository Contributor Search Documentation",
+     "github_organisation_administration.tex",
+     u"GitHub Organisation Administration Documentation",
      u"ukgovdatascience", "manual"),
 ]
 
@@ -237,7 +237,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples (source start file, name, description, authors, manual section).
 man_pages = [
-    ("index", "github-repository-contributor-search", u"GitHub Repository Contributor Search Documentation",
+    ("index", "github_organisation_administration", u"GitHub Organisation Administration Documentation",
      [u"ukgovdatascience"], 1)
 ]
 
@@ -250,8 +250,8 @@ man_pages = [
 # Grouping the document tree into Texinfo files. List of tuples (source start file, target name, title, author,  dir
 # menu entry, description, category)
 texinfo_documents = [
-    ("index", "github-repository-contributor-search", u"GitHub Repository Contributor Search Documentation",
-     u"ukgovdatascience", "GitHub Repository Contributor Search",
+    ("index", "github_organisation_administration", u"GitHub Organisation Administration Documentation",
+     u"ukgovdatascience", "GitHub Organisation Administration",
      "Use GitHub REST API v3 to find repositories where specific users have contributed.", "Miscellaneous"),
 ]
 
