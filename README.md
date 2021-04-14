@@ -34,7 +34,8 @@ The functions can:
 Here is an example of getting the names of all contributors across all organisation repositories:
 
 > ⚠️ Note that, because the `name` attribute is not in the [API response][github-contributors] for getting repository
-contributors, PyGithub will send another API GET request for each contributor to obtain their name!
+contributors, PyGithub will send another API GET request for each contributor to obtain their name! This may quickly
+exceed the [API rate limit for large organisations][github-rate-limit].
 
 ```python
 from github import Github
@@ -113,6 +114,7 @@ This project structure is based on the [`govcookiecutter`][govcookiecutter] temp
 [docs-loading-environment-variables-secrets]: ./docs/user_guide/loading_environment_variables.md#storing-secrets-and-credentials
 [docs-pre-commit-hooks]: ./docs/contributor_guide/pre_commit_hooks.md
 [github-contributors]: https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#list-repository-contributors
+[github-rate-limit]: https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting
 [notebooks]: ./notebooks
 [pre-commit]: https://pre-commit.com/
 [pygithub]: https://pygithub.readthedocs.io/
