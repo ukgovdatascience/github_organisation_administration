@@ -46,7 +46,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "GitHub Organisation Administration"
-author = "ukgovdatascience"
+author = "alphagov"
 
 # The version info for the project you're documenting, acts as replacement for |version| and |release|, also used in
 # various other places throughout the built documents.
@@ -211,7 +211,7 @@ latex_documents = [
     ("index",
      "github-organisation-administration.tex",
      u"GitHub Organisation Administration Documentation",
-     u"ukgovdatascience", "manual"),
+     u"alphagov", "manual"),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of the title page.
@@ -238,7 +238,7 @@ latex_documents = [
 # One entry per manual page. List of tuples (source start file, name, description, authors, manual section).
 man_pages = [
     ("index", "github-organisation-administration", u"GitHub Organisation Administration Documentation",
-     [u"ukgovdatascience"], 1)
+     [u"alphagov"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -251,7 +251,7 @@ man_pages = [
 # menu entry, description, category)
 texinfo_documents = [
     ("index", "github-organisation-administration", u"GitHub Organisation Administration Documentation",
-     u"ukgovdatascience", "GitHub Organisation Administration",
+     u"alphagov", "GitHub Organisation Administration",
      "Use GitHub REST API v3 to find repositories where specific users have contributed.", "Miscellaneous"),
 ]
 

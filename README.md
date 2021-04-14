@@ -75,7 +75,7 @@ the following environment variable name(s):
 | Secret/credential              | Environment variable name | Description                                                 |
 |--------------------------------|---------------------------|-------------------------------------------------------------|
 | GitHub personal access token   | `GITHUB_API_KEY`          | See [here][docs-github-token] for further information       |
-| GitHub organisation name       | `GITHUB_ORGANISATION`     | The GitHub organisation name, e.g. `ukgovdatascience`       |
+| GitHub organisation name       | `GITHUB_ORGANISATION`     | The GitHub organisation name, e.g. `alphagov`               |
 | GitHub organisation admin team | `GITHUB_ADMIN_TEAM_SLUG`  | The GitHub team name that should have repo admin privileges |
 
 Once you've added these environment variables to `.secrets` you will need to
