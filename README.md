@@ -1,17 +1,10 @@
-# `GitHub Organisation Administration`
+# GitHub Organisation Administration
 
 Use GitHub REST API v3 to do administration tasks within a GitHub organisation. The main aim of this project is prevent
 accidental access loss to organisation repositories when individuals leave the organisation by programatically adding,
 and setting team permissions across multiple repositories.
 
 > ℹ️ Where this documentation refers to the **root folder** we mean where this README.md is located.
-
-- [Getting started](#getting-started)
-  - [Requirements](#requirements)
-- [Required secrets and credentials](#required-secrets-and-credentials)
-- [Licence](#licence)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
 
 ## Getting started
 

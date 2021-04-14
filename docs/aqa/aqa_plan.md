@@ -6,11 +6,6 @@ project. Further resources related to the Aqua Book can be found [here][aqua-boo
 This is a **living** document, and should be updated and/or modified as necessary, e.g. if new tasks not listed here
 become relevant to project success, please add them to this plan.
 
-```{contents}
-:local:
-:depth: 1
-```
-
 ## General
 
 - Security
