@@ -58,10 +58,13 @@ class Log(object):
         """A logging decorator to log entry, and exit into any given function, and also log exceptions.
 
         Args:
-            logger_obj: Default: None. A logging.Logger or logging.RootLogger object. If None, a root logger is setup
-              later.
+            logger_obj: Default: None. A ``logging.Logger`` or ``logging.RootLogger`` object. If None, a root logger is
+                setup later.
             level: Default: 'info'. The level of function entry/and exit messages. Must be a one of the levels listed
-              in the documentation here: https://docs.python.org/3/library/logging.html#logging-levels
+                in the documentation here_.
+
+        .. _here:
+            https://docs.python.org/3/library/logging.html#logging-levels
 
         """
 

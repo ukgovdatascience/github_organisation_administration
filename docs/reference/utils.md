@@ -25,6 +25,6 @@ These `src` package functions create utility functions.
     :toctree: api/
 
     Log
-    logger
+    create_logger
 
 ```

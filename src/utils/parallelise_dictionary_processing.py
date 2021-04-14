@@ -12,7 +12,7 @@ def parallelise_processing(callable_function: Callable, iterable: iter, cpu_coun
         max_chunksize: The maximum number of iterables per CPU.
 
     Returns:
-        All the outputs of callable_function as a list.
+        All the outputs of ``callable_function`` as a list.
 
     """
 
@@ -39,7 +39,7 @@ def parallelise_dictionary_processing(callable_function: Callable[..., Dict], it
         max_chunksize: The maximum number of iterables per CPU.
 
     Returns:
-        All the outputs of callable_function collapsing into a single dictionary.
+        All the outputs of ``callable_function`` collapsing into a single dictionary.
 
     """
 

@@ -8,22 +8,25 @@ def find_organisation_repos(g: Github, organisation: str, repository_type: str =
                             direction: str = "asc") -> Union[PaginatedList.PaginatedList, Repository.Repository]:
     """Get repositories for a GitHub organisation.
 
-    For accepted string values for `repository_type`, `sort`, and `direction`, see the `GitHub REST API Reference`_.
+    For accepted string values for ``repository_type``, ``sort``, and ``direction``, see the
+    `GitHub REST API Reference`__.
 
     Args:
-        g: A `github.Github` class object initialised with a GitHub username and personal access token with the
+        g: A ``github.Github`` class object initialised with a GitHub username and personal access token with the
             necessary permissions.
         organisation: A GitHub organisation name.
         repository_type: The repository types required.
         sort: How the return should be sorted.
-        direction: The direction of `sort`.
+        direction: The direction of ``sort``.
 
     Returns:
-        A `github.PaginatedList.PaginatedList` or `github.Repository.Repository` object containing the GitHub
+        A ``github.PaginatedList.PaginatedList`` or ``github.Repository.Repository`` object containing the GitHub
         repositories in a GitHub organisation.
 
-    .. _GitHub REST API Reference:
+    .. _reference:
         https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#list-organization-repositories
+
+    __ reference_
 
     """
 
