@@ -2,15 +2,14 @@ from typing import Callable, Dict, List
 import multiprocessing as mp
 
 
-def parallelise_processing(callable_function: Callable, iterable: iter, cpu_count: int = mp.cpu_count(),
-                           max_chunksize: int = 1000) -> List:
+def parallelise_processing(callable_function: Callable, iterable: iter, cpu_count: int, max_chunksize: int) -> List:
     """Parallelise processing of an iterable.
 
     Args:
         callable_function: A callable function that returns a dictionary.
         iterable: An iterable that will be split amongst the CPUs for parallel processing.
-        cpu_count: Default: maximum number of CPUs. The number of CPUs to parallelise the processing.
-        max_chunksize: Default: 1000. The maximum number of iterables per CPU.
+        cpu_count: The number of CPUs to parallelise the processing.
+        max_chunksize: The maximum number of iterables per CPU.
 
     Returns:
         All the outputs of callable_function as a list.
@@ -30,14 +29,14 @@ def parallelise_processing(callable_function: Callable, iterable: iter, cpu_coun
 
 
 def parallelise_dictionary_processing(callable_function: Callable[..., Dict], iterable: iter,
-                                      cpu_count: int = mp.cpu_count(), max_chunksize: int = 1000) -> Dict:
+                                      cpu_count: int, max_chunksize: int) -> Dict:
     """Parallelise processing of a dictionary.
 
     Args:
         callable_function: A callable function that returns a dictionary.
         iterable: An iterable that will be split amongst the CPUs for parallel processing.
-        cpu_count: Default: maximum number of CPUs. The number of CPUs to parallelise the processing.
-        max_chunksize: Default: 1000. The maximum number of iterables per CPU.
+        cpu_count: The number of CPUs to parallelise the processing.
+        max_chunksize: The maximum number of iterables per CPU.
 
     Returns:
         All the outputs of callable_function collapsing into a single dictionary.
