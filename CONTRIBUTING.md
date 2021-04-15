@@ -3,15 +3,6 @@
 We love contributions! We've compiled this documentation to help you understand our contributing guidelines. If you
 still have questions, please [contact us][email] and we'd be happy to help!
 
-- [Code of Conduct](#code-of-conduct)
-- [Getting started](#getting-started)
-- [Code conventions](#code-conventions)
-  - [Git and GitHub](#git-and-github)
-  - [Python](#python)
-  - [Markdown](#markdown)
-- [Testing](#testing)
-- [Documentation](#documentation)
-
 ## Code of Conduct
 
 Please read [`CODE_OF_CONDUCT.md`][code-of-conduct] before contributing.
@@ -69,8 +60,8 @@ example with long hyperlinks.
 ## Testing
 
 Tests are written using the [pytest][pytest] framework, with its configuration in the `pytest.ini` file. Note, only
-tests in the `tests`, and `github-repository-contributor-search/tests` folders are executed. To run the tests, execute the
-following command in your terminal:
+tests in the `tests`, and `github-organisation-administration/tests` folders are executed. To run the tests, execute
+the following command in your terminal:
 
 ```shell
 pytest
@@ -80,7 +71,7 @@ pytest
 
 Code coverage of Python scripts is measured using the [`coverage`][coverage] Python package; its configuration can be
 found in `.coveragerc`. Note coverage only extends to Python scripts in the `hooks`, and
-`github-repository-contributor-search/src` folders.
+`github-organisation-administration/src` folders.
 
 To run code coverage, and view it as a HTML report, execute the following command in your terminal:
 

@@ -1,17 +1,10 @@
-# `GitHub Organisation Administration`
+# GitHub Organisation Administration
 
 Use GitHub REST API v3 to do administration tasks within a GitHub organisation. The main aim of this project is prevent
 accidental access loss to organisation repositories when individuals leave the organisation by programatically adding,
 and setting team permissions across multiple repositories.
 
 > ℹ️ Where this documentation refers to the **root folder** we mean where this README.md is located.
-
-- [Getting started](#getting-started)
-  - [Requirements](#requirements)
-- [Required secrets and credentials](#required-secrets-and-credentials)
-- [Licence](#licence)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
 
 ## Getting started
 
@@ -41,7 +34,8 @@ The functions can:
 Here is an example of getting the names of all contributors across all organisation repositories:
 
 > ⚠️ Note that, because the `name` attribute is not in the [API response][github-contributors] for getting repository
-contributors, PyGithub will send another API GET request for each contributor to obtain their name!
+contributors, PyGithub will send another API GET request for each contributor to obtain their name! This may quickly
+exceed the [API rate limit for large organisations][github-rate-limit].
 
 ```python
 from github import Github
@@ -82,7 +76,7 @@ the following environment variable name(s):
 | Secret/credential              | Environment variable name | Description                                                 |
 |--------------------------------|---------------------------|-------------------------------------------------------------|
 | GitHub personal access token   | `GITHUB_API_KEY`          | See [here][docs-github-token] for further information       |
-| GitHub organisation name       | `GITHUB_ORGANISATION`     | The GitHub organisation name, e.g. `ukgovdatascience`       |
+| GitHub organisation name       | `GITHUB_ORGANISATION`     | The GitHub organisation name, e.g. `alphagov`               |
 | GitHub organisation admin team | `GITHUB_ADMIN_TEAM_SLUG`  | The GitHub team name that should have repo admin privileges |
 
 Once you've added these environment variables to `.secrets` you will need to
@@ -120,6 +114,7 @@ This project structure is based on the [`govcookiecutter`][govcookiecutter] temp
 [docs-loading-environment-variables-secrets]: ./docs/user_guide/loading_environment_variables.md#storing-secrets-and-credentials
 [docs-pre-commit-hooks]: ./docs/contributor_guide/pre_commit_hooks.md
 [github-contributors]: https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#list-repository-contributors
+[github-rate-limit]: https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting
 [notebooks]: ./notebooks
 [pre-commit]: https://pre-commit.com/
 [pygithub]: https://pygithub.readthedocs.io/

@@ -5,17 +5,17 @@ from typing import Any, Dict
 
 @Log(logger, level="debug")
 def get_items_for_repo(g: Github, method_name: str, repository_name: str) -> Dict[str, Any]:
-    """Get all values of an item for a GitHub repository, where items is the output from `method_name`.
+    """Get all values of an item for a GitHub repository, where items is the output from ``method_name``.
 
     Args:
-        g: A `github.Github` class object initialised with a GitHub username and personal access token with the
+        g: A ``github.Github`` class object initialised with a GitHub username and personal access token with the
             necessary permissions.
-        method_name: A method of the github.Repository.Repository class.
+        method_name: A method of the ``github.Repository.Repository`` class.
         repository_name: A Github repository name.
 
     Returns:
-        A dictionary where the key is the repository name, and the value is the result of executing method_name on a
-        GitHub repository called repository_name.
+        A dictionary where the key is the repository name, and the value is the result of executing ``method_name`` on
+        a GitHub repository called ``repository_name``.
 
     """
     return {repository_name: getattr(g.get_repo(repository_name), method_name)()}

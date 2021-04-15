@@ -10,14 +10,14 @@ import multiprocessing as mp
 @Log(logger)
 def get_items_for_all_repos(g: Github, method_name: str, repositories: Union[List, PaginatedList.PaginatedList],
                             cpu_count: int = mp.cpu_count(), max_chunksize: int = 1000) -> Dict[str, List[Any]]:
-    """Get all the items for a list of GitHub repositories, where items is the output from `method_name`.
+    """Get all the items for a list of GitHub repositories, where items is the output from ``method_name``.
 
     Args:
-        g: A `github.Github` class object initialised with a GitHub username and personal access token with the
+        g: A ``github.Github`` class object initialised with a GitHub username and personal access token with the
             necessary permissions.
-        method_name: A method of the github.Repository.Repository class.
-        repositories: A list of `github.Repository.Repository` repositories as a list or
-            `github.PaginatedList.PaginatedList` object.
+        method_name: A method of the ``github.Repository.Repository`` class.
+        repositories: A list of ``github.Repository.Repository`` repositories as a list or
+            ``github.PaginatedList.PaginatedList`` object.
         cpu_count: Default: maximum number of CPUs. The number of CPUs to parallelise the API requests.
         max_chunksize: Default: 1000. The maximum number of repositories per CPU to call.
 

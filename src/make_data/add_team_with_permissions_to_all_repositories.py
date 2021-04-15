@@ -13,11 +13,11 @@ def check_team_added_already(team_name: str, repository: Repository.Repository) 
 
     Args:
         team_name: A GitHub organisation team name.
-        repository: A `github.Repository.Repository` object of the GitHub repository of interest.
+        repository: A ``github.Repository.Repository`` object of the GitHub repository of interest.
 
     Returns:
-        True/False depending on whether `team_name` exists as the name of a GitHub organisation team within the GitHub
-        repository `repository`.
+        True/False depending on whether ``team_name`` exists as the name of a GitHub organisation team within the
+            GitHub repository ``repository``.
 
     """
     return team_name in extract_attribute_from_paginated_list_elements(repository.get_teams(), "name")
@@ -29,16 +29,16 @@ def add_team_with_permissions_to_repository(team: Team.Team, permission: str,
     """Add a team to a GitHub repository if it isn't already added, and set its permission level.
 
     Args:
-        team: A `github.Team.Team` object containing the GitHub organisation team to add to the repository with set
+        team: A ``github.Team.Team`` object containing the GitHub organisation team to add to the repository with set
             permissions.
-        permission: A permission level to provide the `team` within `repository`. See the `GitHub API documentation`_
+        permission: A permission level to provide the ``team`` within ``repository``. See the GitHub API documentation_
             for possible options.
-        repository: A `github.Repository.Repository` object containing the GitHub organisation repository of interest.
+        repository: A ``github.Repository.Repository`` object containing the GitHub organisation repository of interest.
 
     Returns:
-        None. `repository` will have `team` with `permission` access to it.
+        None. ``repository`` will have ``team`` with ``permission`` access to it.
 
-    .. _GitHub API documentation:
+    .. _documentation:
         https://docs.github.com/en/free-pro-team@latest/rest/reference/teams#add-or-update-team-repository-permissions
 
     """
@@ -58,19 +58,19 @@ def add_team_with_permissions_to_all_repositories(team: Team.Team, permission: s
     """Add a team to a list of GitHub repositories if it isn't already added, and set its permission level.
 
     Args:
-        team: A `github.Team.Team` object containing the GitHub organisation team to add to the repository with set
+        team: A ``github.Team.Team`` object containing the GitHub organisation team to add to the repository with set
             permissions.
-        permission: A permission level to provide the `team` within `repository`. See the `GitHub API
-            documentation`_ for possible options.
-        repositories: A list or `github.PaginatedList.PaginatedList` objects containing `github.Repository.Repository`
-            objects of the GitHub organisation repositories.
+        permission: A permission level to provide the ``team`` within ``repository``. See the GitHub API
+            documentation_ for possible options.
+        repositories: A list or ``github.PaginatedList.PaginatedList`` objects containing
+            ``github.Repository.Repository`` objects of the GitHub organisation repositories.
         cpu_count: Default: maximum number of CPUs. The number of CPUs to parallelise the processing.
         max_chunksize: Default: 1000. The maximum number of iterables per CPU.
 
     Returns:
-        None. Each repository in `repositories` will have `team` with `permission` access to it.
+        None. Each repository in ``repositories`` will have ``team`` with ``permission`` access to it.
 
-    .. _GitHub API documentation:
+    .. _documentation:
         https://docs.github.com/en/free-pro-team@latest/rest/reference/teams#add-or-update-team-repository-permissions
 
     """

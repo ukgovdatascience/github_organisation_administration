@@ -3,11 +3,6 @@
 To use this repository, you need to create a GitHub API personal access token, and store it with the untracked
 `.secrets` file. This ensures your token is not accidentally version-controlled alongside your code.
 
-```{contents}
-:local:
-:depth: 2
-```
-
 ## Getting a GitHub personal access token
 
 Follow the instructions [here][github-token] to create a personal access token. You will need to grant `repo` access
