@@ -73,11 +73,11 @@ To run this project, you need a `.secrets` file with secrets/credentials as envi
 [documentation][docs-loading-environment-variables-secrets] for further guidance. The secrets/credentials should have
 the following environment variable name(s):
 
-| Secret/credential              | Environment variable name | Description                                                 |
-|--------------------------------|---------------------------|-------------------------------------------------------------|
-| GitHub personal access token   | `GITHUB_API_KEY`          | See [here][docs-github-token] for further information       |
-| GitHub organisation name       | `GITHUB_ORGANISATION`     | The GitHub organisation name, e.g. `alphagov`               |
-| GitHub organisation admin team | `GITHUB_ADMIN_TEAM_SLUG`  | The GitHub team name that should have repo admin privileges |
+| Secret/credential            | Environment variable name | Description                                           |
+|------------------------------|---------------------------|-------------------------------------------------------|
+| GitHub personal access token | `GITHUB_API_KEY`          | See [here][docs-github-token] for further information |
+| GitHub organisation name     | `GITHUB_ORGANISATION`     | The GitHub organisation name, e.g. `alphagov`         |
+| GitHub organisation team     | `GITHUB_TEAM_SLUG`        | The GitHub team name that should have repo privileges |
 
 Once you've added these environment variables to `.secrets` you will need to
 [load them via `.envrc`][docs-loading-environment-variables].
